@@ -2,47 +2,67 @@
 .Test Scenario
 |===
 | Test Id | Test Case Name | Precondition | Test Data | Expected Result | Result | Actual Reslut
-| TC04 | Membuat order baru dengan data restaurant yang tidak terdaftar |   Customer telah terdaftar  | {
+| TC06 | Membuat order tanpa memilih menu | Sudah ada data restaurant yang tersimpan, Sudah ada data menu pada restaurant yang dipilih, Customer telah terdaftar  | {
   "consumerId": 9,
   "deliveryAddress": {
-    "city": "bandung",
-    "state": "indonesia",
-    "street1": "ciwaruga",
-    "street2": "polban",
+    "city": "Bandung",
+    "state": "Indonesia",
+    "street1": "Ciwaruga",
+    "street2": "Polban",
     "zip": "40559"
   },
   "deliveryTime": "2024-04-04T16:16:00.125Z",
-  "lineItems": [
-    {
-      "menuItemId": "001",
-      "quantity": 1
-    }
-  ],
-  "restaurantId": 100
-} | Expected Result:
-Order akan gagal terbuat dan pemanggilan endpoint API akan mengembalikan response berupa error karena restaurant tidak terdaftar
-
+  "lineItems": [ ],
+  "restaurantId": 2
+}
+ | Order akan gagal terbuat dan pemanggilan endpoint API akan mengembalikan response berupa error karena tidak ada satupun menu yang terpilih | FAIL | Actual Result :
+Order akan terbuat dan pemanggilan endpoint API akan mengembalikan response berupa orderId dari order yang baru terbuat
 
 
 Response:
-{ "timestamp": "2024-04-05T09:07:55.338+0000", "status": 500, "error": "Internal Server Error", "message": "Restaurant not found with id 100", "path": "/orders"} | PASS | Actual Result:
-Order akan gagal terbuat dan pemanggilan endpoint API akan mengembalikan response berupa error karena restaurant tidak terdaftar
-| TC05 | Membuat order dengan memilih menu yang tidak terdaftar | Sudah ada data restaurant yang tersimpan, Sudah ada data menu pada restaurant yang dipilih, Customer telah terdaftar  | {
+{
+  "orderId": 4
+}
+
+| TC07 | Membuat order dengan memilih minimal satu menu | Sudah ada data restaurant yang tersimpan, Sudah ada data menu pada restaurant yang dipilih, Customer telah terdaftar  | {
   "consumerId": 9,
   "deliveryAddress": {
-    "city": "bandung",
-    "state": "indonesia",
-    "street1": "ciwaruga",
-    "street2": "polban",
+    "city": "Bandung",
+    "state": "Indonesia",
+    "street1": "Ciwaruga",
+    "street2": "Polban",
     "zip": "40559"
   },
   "deliveryTime": "2024-04-04T16:16:00.125Z",
   "lineItems": [
     {
-      "menuItemId": "100",
+      "menuItemId": "001", 
+      "quantity": 2
+    },
+    {
+      "menuItemId": "002",
       "quantity": 1
     }
   ],
-  "restaurantId": 02
-}| Expected Result:
-Order akan gagal terbuat dan pemanggilan endpoint API akan mengembalikan response berupa error karena menu yang dipilih tidak terdaftar
+  "restaurantId": 2
+} | Order akan terbuat dan pemanggilan endpoint API akan mengembalikan response berupa orderId dari order yang baru terbuat | PASS | Actual Result :
+Order akan terbuat dan pemanggilan endpoint API akan mengembalikan response berupa orderId dari order yang baru terbuat
+
+
+Response:
+{
+  "orderId": 5
+}
+
+| TC08 | POST | /orders/{orderId}/revise | {
+  "revisedOrderLineItems": [
+    {
+      "menuItemId": "002",
+      "quantity": 9
+    }
+  ]
+} | {
+    "orderId": 3,
+    "state": "APPROVAL_PENDING",
+    "orderTotal": "12.00"
+} | PASS | xref:A-TC08[Attachment TC08]
