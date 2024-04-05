@@ -2,29 +2,7 @@
 .Test Scenario
 |===
 | Test Id | Test Case Name | Precondition | Test Data | Expected Result | Result | Actual Reslut
-| TC06 | Membuat order tanpa memilih menu | Sudah ada data restaurant yang tersimpan, Sudah ada data menu pada restaurant yang dipilih, Customer telah terdaftar  | {
-  "consumerId": 9,
-  "deliveryAddress": {
-    "city": "Bandung",
-    "state": "Indonesia",
-    "street1": "Ciwaruga",
-    "street2": "Polban",
-    "zip": "40559"
-  },
-  "deliveryTime": "2024-04-04T16:16:00.125Z",
-  "lineItems": [ ],
-  "restaurantId": 2
-}
- | Order akan gagal terbuat dan pemanggilan endpoint API akan mengembalikan response berupa error karena tidak ada satupun menu yang terpilih | FAIL | Actual Result :
-Order akan terbuat dan pemanggilan endpoint API akan mengembalikan response berupa orderId dari order yang baru terbuat
-
-
-Response:
-{
-  "orderId": 4
-}
-
-| TC07 | Membuat order dengan memilih minimal satu menu | Sudah ada data restaurant yang tersimpan, Sudah ada data menu pada restaurant yang dipilih, Customer telah terdaftar  | {
+| TC09 | Membuat order dengan memilih menu dengan kuantitas kurang dari satu | Sudah ada data restaurant yang tersimpan, sudah ada data menu pada restaurant yang dipilih, customer telah terdaftar | {
   "consumerId": 9,
   "deliveryAddress": {
     "city": "Bandung",
@@ -36,33 +14,62 @@ Response:
   "deliveryTime": "2024-04-04T16:16:00.125Z",
   "lineItems": [
     {
-      "menuItemId": "001", 
-      "quantity": 2
-    },
-    {
-      "menuItemId": "002",
-      "quantity": 1
+      "menuItemId": "001",
+      "quantity": 0
     }
   ],
   "restaurantId": 2
-} | Order akan terbuat dan pemanggilan endpoint API akan mengembalikan response berupa orderId dari order yang baru terbuat | PASS | Actual Result :
+}
+ | Order akan gagal terbuat dan pemanggilan endpoint API akan mengembalikan response berupa error karena quantity kurang dari satu | FAIL | Actual Result :
 Order akan terbuat dan pemanggilan endpoint API akan mengembalikan response berupa orderId dari order yang baru terbuat
+
+Response:
+{
+  "orderId": 7
+}
+
+| TC10 | Mengubah order dengan mengganti kuantitas dengan nilai minimal satu | Sudah ada Order yang tersimpan | {
+  "revisedOrderLineItems": [
+    {
+      "menuItemId": "001",
+      "quantity": 3
+    }
+  ]
+}| Kuantitas dari sebuah menu akan berubah sesuai kuantitas baru yang ditentukan dan pemanggilan endpoint API akan mengembalikan response berupa perubahan yang menampilkan orderId, state, dan orderTotal
+
 
 
 Response:
 {
-  "orderId": 5
-}
-
-| TC08 | POST | /orders/{orderId}/revise | {
-  "revisedOrderLineItems": [
-    {
-      "menuItemId": "002",
-      "quantity": 9
-    }
-  ]
-} | {
-    "orderId": 3,
+    "orderId": 1,
     "state": "APPROVAL_PENDING",
     "orderTotal": "12.00"
-} | PASS | xref:A-TC08[Attachment TC08]
+} | PASS | Actual Result:
+Kuantitas dari sebuah menu akan berubah sesuai kuantitas baru yang ditentukan dan pemanggilan endpoint API akan mengembalikan response berupa perubahan yang menampilkan orderId, state, dan orderTotal
+
+
+Response:
+{
+    "orderId": 1,
+    "state": "APPROVAL_PENDING",
+    "orderTotal": "12.00"
+}
+
+
+| TC11 | MMengubah order dengan mengganti dengan kuantitas kurang dari satu | Sudah ada Order yang tersimpan | {
+  "revisedOrderLineItems": [
+    {
+      "menuItemId": "001",
+      "quantity": -4
+    }
+  ]
+}| Kuantitas dari sebuah menu tidak akan berubah, pemanggilan endpoint API akan mengembalikan response berupa error karena kuantitas yang ditentukan kurang dari satu. | FAIL | Actual Result:
+Kuantitas dari sebuah menu berubah sesuai kuantitas baru yang ditentukan dimana total harga disini bisa berupa nol dan negatif, dan pemanggilan endpoint API akan mengembalikan response berupa perubahan yang menampilkan orderId, state, dan orderTotal. 
+
+
+Response:
+{
+  "orderId": 1,
+  "state": "APPROVED",
+  "orderTotal": "-28000.00"
+}
