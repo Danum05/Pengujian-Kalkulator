@@ -1,3 +1,7 @@
+[cols="1,2,2,3,3,2,2"]
+.Test Scenario
+|===
+| Test Id | Test Case Name | Precondition | Test Data | Expected Result | Result | Actual Reslut
 | TC04 | Membuat order baru dengan data restaurant yang tidak terdaftar |   Customer telah terdaftar  | {
   "consumerId": 9,
   "deliveryAddress": {
