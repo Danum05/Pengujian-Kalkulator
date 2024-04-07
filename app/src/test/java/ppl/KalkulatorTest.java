@@ -6,98 +6,69 @@ import static org.junit.jupiter.api.Assertions.*;
 public class KalkulatorTest {
 
     @Test
-    public void testPertambahan() {
-        double hasil = Kalkulator.pertambahan(5, 3);
-        assertEquals(8, hasil);
+    void testPertambahan() {
+        assertEquals(4, Kalkulator.pertambahan(2, 2)); // Kondisi normal
+        assertEquals(0, Kalkulator.pertambahan(-2, 2)); // Kondisi salah satu angka negatif
+        assertEquals(7.5, Kalkulator.pertambahan(3.5, 4)); // Kondisi angka desimal
+        assertEquals(-10, Kalkulator.pertambahan(-20, 10)); // Kondisi negatif
+        assertEquals(0, Kalkulator.pertambahan(0, 0)); // Kondisi angka nol
     }
 
     @Test
-    public void testPertambahanNegatif() {
-        double hasil = Kalkulator.pertambahan(-5, -3);
-        assertEquals(-8, hasil);
+    void testPengurangan() {
+        assertEquals(3, Kalkulator.pengurangan(5, 2)); // Kondisi normal
+        assertEquals(-7, Kalkulator.pengurangan(-5, 2)); // Kondisi salah satu angka negatif
+        assertEquals(2.5, Kalkulator.pengurangan(5, 2.5)); // Kondisi angka desimal
+        assertEquals(-30, Kalkulator.pengurangan(-20, 10)); // Kondisi negatif
+        assertEquals(0, Kalkulator.pengurangan(0, 0)); // Kondisi angka nol
     }
 
     @Test
-    public void testPengurangan() {
-        double hasil = Kalkulator.pengurangan(5, 3);
-        assertEquals(2, hasil);
+    void testPerkalian() {
+        assertEquals(10, Kalkulator.perkalian(5, 2)); // Kondisi normal
+        assertEquals(-10, Kalkulator.perkalian(-5, 2)); // Kondisi salah satu angka negatif
+        assertEquals(12.5, Kalkulator.perkalian(5, 2.5)); // Kondisi angka desimal
+        assertEquals(-200, Kalkulator.perkalian(-20, 10)); // Kondisi negatif
+        assertEquals(0, Kalkulator.perkalian(0, 5)); // Kondisi angka nol
     }
 
     @Test
-    public void testPenguranganNegatif() {
-        double hasil = Kalkulator.pengurangan(-5, -3);
-        assertEquals(-2, hasil);
+    void testPembagian() {
+        assertEquals(2.5, Kalkulator.pembagian(5, 2)); // Kondisi normal
+        assertEquals(-2.5, Kalkulator.pembagian(-5, 2)); // Kondisi salah satu angka negatif
+        assertEquals(2, Kalkulator.pembagian(5, 2.5)); // Kondisi angka desimal
+        assertEquals(-2, Kalkulator.pembagian(-20, 10)); // Kondisi negatif
+        assertEquals(Double.POSITIVE_INFINITY, Kalkulator.pembagian(5, 0)); // Kondisi pembagian dengan nol
     }
 
     @Test
-    public void testPerkalian() {
-        double hasil = Kalkulator.perkalian(5, 3);
-        assertEquals(15, hasil);
+    void testValidasi() {
+        // Kondisi normal
+        assertEquals(10, Kalkulator.Validasi(5, 5, '1')); // Penambahan
+        assertEquals(0, Kalkulator.Validasi(5, 5, '2')); // Pengurangan
+        assertEquals(25, Kalkulator.Validasi(5, 5, '3')); // Perkalian
+        assertEquals(1, Kalkulator.Validasi(5, 5, '4')); // Pembagian
+
+        // Kondisi angka di luar range
+        assertEquals(Double.NaN, Kalkulator.Validasi(-50000, 5, '1')); // Penambahan
+        assertEquals(Double.NaN, Kalkulator.Validasi(5, 50000, '2')); // Pengurangan
+        assertEquals(Double.NaN, Kalkulator.Validasi(50000, 5, '3')); // Perkalian
+        assertEquals(Double.NaN, Kalkulator.Validasi(5, 0, '4')); // Pembagian dengan nol
+
+        // Kondisi pembagian dengan nol
+        assertEquals(Double.NaN, Kalkulator.Validasi(5, 0, '4')); // Pembagian
     }
 
     @Test
-    public void testPerkalianNegatif() {
-        double hasil = Kalkulator.perkalian(-5, -3);
-        assertEquals(15, hasil);
-    }
+    void testKomputasi() {
+        // Kondisi normal
+        assertEquals(10, Kalkulator.komputasi(5, 5, '1')); // Penambahan
+        assertEquals(0, Kalkulator.komputasi(5, 5, '2')); // Pengurangan
+        assertEquals(25, Kalkulator.komputasi(5, 5, '3')); // Perkalian
+        assertEquals(1, Kalkulator.komputasi(5, 5, '4')); // Pembagian
 
-    @Test
-    public void testPembagian() {
-        double hasil = Kalkulator.pembagian(10, 5);
-        assertEquals(2, hasil);
-    }
+        // Kondisi operator tidak dikenal
+        assertEquals(Double.NaN, Kalkulator.komputasi(5, 5, '5')); // Operator tidak dikenal
 
-    @Test
-    public void testPembagianNegatif() {
-        double hasil = Kalkulator.pembagian(-10, -5);
-        assertEquals(2, hasil);
-    }
-
-    @Test
-    public void testComputePenambahan() {
-        double hasil = Kalkulator.compute(5, 3, '1');
-        assertEquals(8, hasil);
-    }
-
-    @Test
-    public void testComputePengurangan() {
-        double hasil = Kalkulator.compute(5, 3, '2');
-        assertEquals(2, hasil);
-    }
-
-    @Test
-    public void testComputePerkalian() {
-        double hasil = Kalkulator.compute(5, 3, '3');
-        assertEquals(15, hasil);
-    }
-
-    @Test
-    public void testComputePembagian() {
-        double hasil = Kalkulator.compute(10, 5, '4');
-        assertEquals(2, hasil);
-    }
-
-    @Test
-    public void testInvalidRangeAtas() {
-        double hasil = Kalkulator.compute(50000, 500, '1');
-        assertTrue(Double.isNaN(hasil));
-    }
-
-    @Test
-    public void testInvalidRangeBawah() {
-        double hasil = Kalkulator.compute(-50000, 500, '1');
-        assertTrue(Double.isNaN(hasil));
-    }
-
-    @Test
-    public void testInvalidOperator() {
-        double hasil = Kalkulator.compute(10, 5, '9');
-        assertTrue(Double.isNaN(hasil));
-    }
-
-    @Test
-    public void testDivideByZero() {
-        double hasil = Kalkulator.compute(10, 0, '4');
-        assertTrue(Double.isNaN(hasil));
     }
 }

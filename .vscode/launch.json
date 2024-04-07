@@ -1,0 +1,42 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "app.src.main.java.ppl.App",
+            "projectName": "PPL_67da2f11"
+        },
+        {
+            "type": "java",
+            "name": "Kalkulator",
+            "request": "launch",
+            "mainClass": "app.src.main.java.ppl.Kalkulator",
+            "projectName": "PPL_67da2f11"
+        },
+        {
+            "type": "java",
+            "name": "App(1)",
+            "request": "launch",
+            "mainClass": "ppl.App",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "Kalkulator(1)",
+            "request": "launch",
+            "mainClass": "ppl.Kalkulator",
+            "projectName": "app"
+        }
+    ]
+}

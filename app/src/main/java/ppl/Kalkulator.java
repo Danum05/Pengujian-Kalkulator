@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 public class Kalkulator {
 
-    static double hasil;
-
     public static double pertambahan(double a, double b) {
         return a + b;
     }
@@ -22,9 +20,9 @@ public class Kalkulator {
         return a / b;
     }
 
-    public static double compute(double angka1, double angka2, char operator) {
+    public static double Validasi(double angka1, double angka2, char operator) {
         // Validasi range nilai angka
-        if (!isValidRange(angka1) || !isValidRange(angka2)) {
+        if (angka1 < -32768 || angka1 > 32767 || angka2 < -32768 || angka2 > 32767) {
             System.err.println("Error: Angka yang dihitung harus berada dalam range -32,768 hingga 32,767.");
             return Double.NaN;
         }
@@ -35,6 +33,16 @@ public class Kalkulator {
             return Double.NaN;
         }
 
+        // Validasi operator
+        if (operator != '1' && operator != '2' && operator != '3' && operator != '4') {
+            System.err.println("Error: Operator tidak dikenal.");
+            return Double.NaN;
+        }
+
+        return komputasi(angka1, angka2, operator);
+    }
+
+    public static double komputasi(double angka1, double angka2, char operator) {
         switch (operator) {
             case '1':
                 return pertambahan(angka1, angka2);
@@ -45,17 +53,8 @@ public class Kalkulator {
             case '4':
                 return pembagian(angka1, angka2);
             default:
-                System.err.println("Error: Operator tidak dikenal.");
                 return Double.NaN;
         }
-    }
-
-    private static boolean isValidRange(double angka) {
-        return angka >= -32768 && angka <= 32767;
-    }
-
-    private static boolean isValidOperator(char operator) {
-        return operator == '1' || operator == '2' || operator == '3' || operator == '4';
     }
 
     public static void main(String[] args) {
@@ -94,15 +93,16 @@ public class Kalkulator {
             System.out.println("3. Perkalian");
             System.out.println("4. Pembagian");
             String inputOperator = scanner.next();
-            if (isValidOperator(inputOperator.charAt(0))) {
+            if (inputOperator.length() == 1) {
                 operator = inputOperator.charAt(0);
-                break;
-            } else {
-                System.out.println("Error: Masukan harus merupakan operator yang valid.");
+                if (operator == '1' || operator == '2' || operator == '3' || operator == '4') {
+                    break;
+                }
             }
+            System.out.println("Error: Masukan harus merupakan operator yang valid.");
         }
 
-        double hasil = compute(angka1, angka2, operator);
+        double hasil = komputasi(angka1, angka2, operator);
         if (!Double.isNaN(hasil)) {
             System.out.println("Hasil: " + hasil);
         }
