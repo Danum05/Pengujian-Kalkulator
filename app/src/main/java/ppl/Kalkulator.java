@@ -4,23 +4,7 @@ import java.util.Scanner;
 
 public class Kalkulator {
 
-    public static double pertambahan(double a, double b) {
-        return a + b;
-    }
-
-    public static double pengurangan(double a, double b) {
-        return a - b;
-    }
-
-    public static double perkalian(double a, double b) {
-        return a * b;
-    }
-
-    public static double pembagian(double a, double b) {
-        return a / b;
-    }
-
-    public static double Validasi(double angka1, double angka2, char operator) {
+    public static double Validasi(Scanner scanner, char operator, double angka1, double angka2) {
         // Validasi range nilai angka
         if (angka1 < -32768 || angka1 > 32767 || angka2 < -32768 || angka2 > 32767) {
             System.err.println("Error: Angka yang dihitung harus berada dalam range -32,768 hingga 32,767.");
@@ -42,6 +26,22 @@ public class Kalkulator {
         return komputasi(angka1, angka2, operator);
     }
 
+    public static double pertambahan(double a, double b) {
+        return a + b;
+    }
+
+    public static double pengurangan(double a, double b) {
+        return a - b;
+    }
+
+    public static double perkalian(double a, double b) {
+        return a * b;
+    }
+
+    public static double pembagian(double a, double b) {
+        return a / b;
+    }
+
     public static double komputasi(double angka1, double angka2, char operator) {
         switch (operator) {
             case '1':
@@ -61,9 +61,6 @@ public class Kalkulator {
         Scanner scanner = new Scanner(System.in);
 
         double angka1 = 0;
-        double angka2 = 0;
-        char operator = '0'; 
-
         while (true) {
             System.out.println("Masukkan angka pertama: ");
             if (scanner.hasNextDouble()) {
@@ -75,6 +72,7 @@ public class Kalkulator {
             }
         }
 
+        double angka2 = 0;
         while (true) {
             System.out.println("Masukkan angka kedua: ");
             if (scanner.hasNextDouble()) {
@@ -86,6 +84,9 @@ public class Kalkulator {
             }
         }
 
+        char operator = '0';
+
+        // Input operator
         while (true) {
             System.out.println("Pilih operasi: ");
             System.out.println("1. Penambahan");
@@ -96,15 +97,14 @@ public class Kalkulator {
             if (inputOperator.length() == 1) {
                 operator = inputOperator.charAt(0);
                 if (operator == '1' || operator == '2' || operator == '3' || operator == '4') {
+                    double hasilValidasi = Validasi(scanner, operator, angka1, angka2);
+                    if (!Double.isNaN(hasilValidasi)) {
+                        System.out.println("Hasil: " + hasilValidasi);
+                    }
                     break;
                 }
             }
-            System.out.println("Error: Masukan harus merupakan operator yang valid.");
-        }
-
-        double hasil = komputasi(angka1, angka2, operator);
-        if (!Double.isNaN(hasil)) {
-            System.out.println("Hasil: " + hasil);
+            System.out.println("Error: Operator tidak dikenal.");
         }
 
         scanner.close();
