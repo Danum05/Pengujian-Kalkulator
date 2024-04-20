@@ -67,7 +67,7 @@ public class Kalkulator {
                 angka1 = scanner.nextDouble();
                 break;
             } else {
-                System.out.println("Error: Masukan harus berupa angka.");
+                System.err.println("Error: Masukan harus berupa angka.");
                 scanner.next(); 
             }
         }
@@ -79,7 +79,7 @@ public class Kalkulator {
                 angka2 = scanner.nextDouble();
                 break;
             } else {
-                System.out.println("Error: Masukan harus berupa angka.");
+                System.err.println("Error: Masukan harus berupa angka.");
                 scanner.next(); 
             }
         }
@@ -104,7 +104,7 @@ public class Kalkulator {
                     break;
                 }
             }
-            System.out.println("Error: Operator tidak dikenal.");
+            System.err.println("Error: Operator tidak dikenal.");
         }
 
         scanner.close();
