@@ -11,46 +11,65 @@ Program ini merupakan program kalkulator untuk memenuhi tugas testing mata kuiah
 ## 1. Directory Tree project
 ```md
 B7-Pengujian-Calculator(project-root)
-│   gradlew
-│   gradlew.bat
-│   README.md
-│   settings.gradle.kts
-├───app
-│   │   build.gradle.kts
-│   ├───build
-│   │   ├───reports
-│   │   │   └───tests
-│   │   │       └───test
-│   │   │           │   index.html
-│   │   │           ├───classes
-│   │   │           │       main.test.CalculatorTest.html
-│   │   │           ├───css
-│   │   │           │       base-style.css
-│   │   │           │       style.css
-│   │   │           ├───js
-│   │   │           │       report.js
-│   │   │           └───packages
-│   │   │                   main.test.html
-│   └───src
-│       ├───main
-│       │   ├───java
-│       │   │   └───a2
-│       │   │       └───calculator
-│       │   │           └───unittesting
-│       │   │                   App.java
-│       │   │                   Calculator.java
-│       │   │                   InputHandler.java
-│       │   │                   ValidationValue.java
-│       │   └───resources
-│       └───test
-│           ├───java
-│           │   └───a2
-│           │       └───calculator
-│           │           └───unittesting
-│           │                   CalculatorTest.java
-│           │          
-│           └───resources
-└───gradle
+- .gradle
+  │   - 8.0.2
+  │   │   - checksums
+  │   │   - dependencies-accessors
+  │   │   - executionHistory
+  │   │   - fileChanges
+  │   │   - fileHashes
+  │   │   - vcsMetadata
+  │   │   - gc.properties
+  │   - buildOutputCleanup
+  │   │   - buildOutputCleanup.lock
+  │   │   - cache.properties
+  │   │   - outputFiles.bin
+  │   - vcs-1
+  │   │   - gc.properties
+  │   - file-system.probe
+- .vscode
+  │   - launch.json
+  │   - settings.json
+- app
+  │   - build
+  │   │   - classes
+  │   │   - distributions
+  │   │   - generated
+  │   │   - jacoco
+  │   │   - libs
+  │   │   - reports
+  │   │   │   - tests
+  │   │   │   │   - test
+  │   │   │   │   │   - classes
+  │   │   │   │   │   - css
+  │   │   │   │   │   - js
+  │   │   │   │   │   - packages
+  │   │   │   │   │   - index.html
+  │   │   - resources
+  │   │   - scripts
+  │   │   - test-results
+  │   │   - tmp
+  │   - src
+  │   │   - main
+  │   │   │   - java
+  │   │   │   │   - ppl
+  │   │   │   │   │   - Kalkulator.java
+  │   │   │   - resources
+  │   │   - test
+  │   │   │   - java
+  │   │   │   │   - ppl
+  │   │   │   │   │   - KalkulatorTest.java
+  │   │   │   - resources
+  │   - build.gradle
+- gradle
+  │   - wrapper
+  │   │   - gradle-wrapper.jar
+  │   │   - gradle-wrapper.properties
+- .gitattributes
+- .gitignore
+- gradlew
+- gradlew.bat
+- settings.gradle
 ```
 
 
