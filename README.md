@@ -1,6 +1,6 @@
 Kelompok B7 
 Anggota : 
-1. Danu Mahesa (2115240)
+1. Danu Mahesa (211524037) (Username Github: Danum05)
 2. Husna Maulana (2115240)
 3. Rofa'ul Akrom H (211524061)
 
