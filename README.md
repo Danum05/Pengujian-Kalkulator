@@ -71,6 +71,14 @@ B7-Pengujian-Calculator(project-root)
 - gradlew.bat
 - settings.gradle
 ```
+1. app: Folder yang berisi kode sumber aplikasi Java yang sedang dikembangkan. Di dalamnya terdapat folder src yang memuat kode sumber utama (main) dan kode sumber pengujian (test).
+2. build.gradle: Berkas konfigurasi Gradle untuk proyek ini. Berkas ini berisi konfigurasi dependencies, plugins, tasks, dan pengaturan proyek lainnya.
+3. src/main/java: Folder untuk menyimpan file-file Java yang merupakan kode sumber utama aplikasi.
+4. src/test/java: Folder untuk menyimpan file-file Java yang merupakan kode sumber pengujian aplikasi.
+5. gradle: Folder yang berisi file-file terkait dengan wrapper Gradle. Berkas gradle-wrapper.jar dan gradle-wrapper.properties dalam subfolder wrapper penting karena digunakan untuk menjalankan Gradle pada proyek ini.
+6. gitignore: Berkas yang berisi daftar pola file dan direktori yang tidak ingin dimasukkan ke dalam repositori Git. Ini penting untuk mengatur mana file yang tidak perlu dilacak oleh Git.
+7. settings.gradle: Berkas konfigurasi Gradle yang berisi pengaturan proyek seperti daftar modul. Ini penting karena mendefinisikan struktur proyek dan modul-modulnya.
+8. index.html yang terdapat dalam folder app/build/reports/tests/test Merupakan laporan yang di generate dari hasil test. File index.html ini berisi ringkasan hasil pengujian unit yang telah dilakukan pada program kalkulator.
 
 
 ## 2. Cara Membuat Test Script
